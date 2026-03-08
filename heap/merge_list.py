@@ -1,7 +1,7 @@
 
 
 
-def merge_list(lists):
+
     """
     lists = [
         [1, 4, 7],     ← list 0  (3 elements)
@@ -55,32 +55,31 @@ def merge_list(lists):
     Input:  [[1,4,7], [2,5,8], [3,6,9]]
     Output: [1,2,3,4,5,6,7,8,9]
     """
-    
     import heapq
-    
-    
-    if not list : 
-        return []
-    
-    heap = []
-    result = []
-    
-    for i, lst in enumerate(lists):
-        if lst :
-            heapq.heappush( heap, (lst[0], i, 0) )  # VLI
+    def merge_list(lists):
+        
+        if not lists : 
+            return []
+        
+        heap = []
+        result = []
+        
+        for i, lst in enumerate(lists):
+            if lst :
+                heapq.heappush( heap, (lst[0], i, 0) )  # VLI
+                
+        while heap: 
+            value, lst_idx, element_idx = heapq.heappop(heap)
             
-    while heap: 
-        value, lst_idx, element_idx = heapq.heappop(heap)
-        
-        result.append(value)
-        
-        next_idx = element_idx + 1
-        
-        if next_idx < len(lists[lst_idx]):
-            heapq.heappush(heap, (lists[lst_idx][next_idx], lst_idx, next_idx))
+            result.append(value)
             
-    
-    return result
+            next_idx = element_idx + 1
+            
+            if next_idx < len(lists[lst_idx]):
+                heapq.heappush(heap, (lists[lst_idx][next_idx], lst_idx, next_idx))
+                
+        
+        return result
 
 
 if __name__ == "__main__" :
