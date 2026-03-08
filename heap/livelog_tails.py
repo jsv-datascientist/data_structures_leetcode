@@ -114,13 +114,13 @@ def livetail(stream):
             
         elif line_lower.startswith("l:"):
           original_log = line[3:].strip()
-          log_word_set = set(line_lower[3].split())
+          log_word_set = set(line_lower[3:].split())
           
           match=[]
           
           for original_query, query_word_set in queries : 
-            query_word_set.issubset(log_word_set)
-            match.append(original_query)
+            if query_word_set.issubset(log_word_set):
+              match.append(original_query)
             
           result[original_log] = match
             
