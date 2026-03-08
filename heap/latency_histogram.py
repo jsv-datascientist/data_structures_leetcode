@@ -38,7 +38,7 @@ def latency_histogram(latencies, num_buckets, bucket_width):
         
         idx = latency // bucket_width
         
-        idx = min(idx, bucket_width -1)
+        idx = min(idx, num_buckets  -1)
         count[idx] += 1
     
     return count
