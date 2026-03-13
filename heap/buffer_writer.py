@@ -7,14 +7,14 @@ class BufferWriter:
     def __init__(self, file, buffer_size):
         
         if buffer_size <= 0:
-            return ValueError("Buffer Size cannot be less than 0")
+            raise ValueError("Buffer Size cannot be less than 0")
         self.buffer_size = buffer_size
         self.file = file
         self.buffer = []
         self.current_size = 0 
-        self.lock = threading.lock()
+        self.lock = threading.Lock()
         
-    def __entry__(self):
+    def __enter__(self):
         return self
     
     def __exit__(self, exc_type, exc_val, exc_tb):
@@ -29,11 +29,12 @@ class BufferWriter:
             if len(data) >= self.buffer_size:
                 #write directtly to memory 
                 self.file.write(data)
+                self._flush__internal()
             self.buffer.append(data)
             self.current_size += len(data)
             
-            if len(self.current_size) >= self.buffer_size:
-                self._flush_internal()
+            if self.current_size >= buffer_size:
+                self._flush__internal()
         
     
     def flush (self):
@@ -41,7 +42,7 @@ class BufferWriter:
             self.__flush__internal()
         
     
-    def __flush__internal(self):
+    def _flush__internal(self):
         if not self.buffer:
             return 
 
