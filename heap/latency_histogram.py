@@ -40,8 +40,10 @@ def latency_histogram(latencies, num_buckets, bucket_width):
         
         idx = min(idx, num_buckets  -1)
         count[idx] += 1
+        # yeild count[:]  # this is done for infinite latency , not yeild count because the previous ones are overridden , so
+        # count[:] make copy each time
     
-    return count
+    return count    #← only returns AFTER loop ends, how about for the infinite latency
 
 if __name__ == "__main__" :
     latencies   = [3, 15, 7, 22, 31, 10, 5]
