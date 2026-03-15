@@ -56,6 +56,7 @@ class solution:
         Is 1 a start?   → 0 in set?  No  ✅ start → count: 1,2,3,4,5? No → length 4 ✅
         """
         
+        # remove any duplicates
         num_set = set(nums)  #for o(1) lookup
         best = 0 
         
