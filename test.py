@@ -2,10 +2,12 @@
 
 if __name__ == "__main__":
     
-    string="hello is the world"
+    string="hello"
     
-    words = string.split()
+    words = tuple(sorted(string))
     
-    print(" ".join(words[::-1]) )
-    # print(filter_words)
+    
+    #print(" ".join(words[::-1]) )
+    print(words)
+    print(set(words))
     
