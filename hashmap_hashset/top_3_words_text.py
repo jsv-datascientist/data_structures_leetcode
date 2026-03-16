@@ -13,3 +13,14 @@ his 'brute force' approach is known to have a time complexity of
 O(N2),
 N is the total number of words. That's not very appealing, right? Hence, we need to find an alternative approach that's more time-efficient.
 """
+
+def frequent_words_finder(text):
+    from collections import defaultdict
+
+    text = text.lower()
+    word_counts = defaultdict(int)
+    word_list = text.split()
+    for word in word_list:
+        word_counts[word] += 1
+    top_three = sorted(word_counts.items(), key=lambda x: x[1], reverse=True)[:3]
+    return top_three
